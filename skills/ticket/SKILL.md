@@ -26,8 +26,10 @@ file in `reference/` and follow it exactly:
 | sync / validate / audit tickets; "a design doc changed"; "what's stale/missing" | **sync** | `reference/sync.md`   |
 
 **Disambiguation.** If the request is bare (`/ticket` with no verb) or genuinely
-ambiguous, ask which mode the user wants before doing anything. Do not guess
-between *review* (one ticket) and *sync* (all tickets) — they are different.
+ambiguous, use the **AskUserQuestion** tool to offer the three modes as options —
+**new** (draft a ticket), **review** (check one ticket), **sync** (validate all
+tickets vs design docs) — before doing anything. Don't guess between *review* (one
+ticket) and *sync* (all tickets) — they are different.
 
 **Chaining (offer, don't auto-run).** After **new**, offer to **review** the new
 ticket. After the user edits a design doc (roadmap/features/decisions), offer to
