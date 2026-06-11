@@ -7,6 +7,7 @@ description: >-
   audit / sync / validate tickets against design docs (roadmap, features,
   decisions) — for example after a design document changes, or to find stale
   or missing tickets and see "what's next".
+argument-hint: new <description> | review <ticket-id> | sync [--report-only|--dry-run]
 ---
 
 # ticket — author, review, and sync project tickets
@@ -17,13 +18,13 @@ This skill manages **tickets** for projects tracked in the Obsidian vault at
 **agent task spec**: a good ticket is what you'd hand a Claude Code agent.
 
 It has three **modes**. Detect the mode from the request, then read the matching
-file in `reference/` and follow it exactly:
+file in `references/` and follow it exactly:
 
 | The user wants to…                                                              | Mode     | Read                  |
 | ------------------------------------------------------------------------------- | -------- | --------------------- |
-| write / draft / create / add a ticket; "new ticket for X"                       | **new**  | `reference/new.md`    |
-| review / critique / check / grade an existing ticket; "is C00X any good?"        | **review** | `reference/review.md` |
-| sync / validate / audit tickets; "a design doc changed"; "what's stale/missing" | **sync** | `reference/sync.md`   |
+| write / draft / create / add a ticket; "new ticket for X"                       | **new**  | `references/new.md`    |
+| review / critique / check / grade an existing ticket; "is C00X any good?"        | **review** | `references/review.md` |
+| sync / validate / audit tickets; "a design doc changed"; "what's stale/missing" | **sync** | `references/sync.md`   |
 
 **Disambiguation.** If the request is bare (`/ticket` with no verb) or genuinely
 ambiguous, use the **AskUserQuestion** tool to offer the three modes as options —
@@ -60,6 +61,8 @@ The two Credo developers are **T** (`[[T]]`) and **Ed** (`[[Ed]]`). `assignee`
 must be one of these links or blank. (Nat has a person page but is not a Credo dev.)
 
 ### Ticket frontmatter schema
+The canonical skeleton is `templates/Ticket Template.md` (vault:
+`templates/ticket/Ticket Template.md`); this table documents the allowed values.
 ```yaml
 type: ticket            # always — this is the Base's filter
 id: C006                # <prefix><zero-padded number>, matches the filename prefix

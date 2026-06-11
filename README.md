@@ -9,10 +9,14 @@ is both **git-tracked** and **auto-discovered** every session:
 ~/.claude/skills  →  ~/repos/hr_claude/skills
 ```
 
-Recreate the symlink on a new machine:
+Recreate the symlinks on a new machine:
 
 ```sh
 ln -s ~/repos/hr_claude/skills ~/.claude/skills
+# Obsidian note templates (Templater reads these from the vault):
+ln -s ~/repos/hr_claude/skills/travel/templates ~/Documents/notes/templates/travel
+ln -s ~/repos/hr_claude/skills/ticket/templates ~/Documents/notes/templates/ticket
+ln -s ~/repos/hr_claude/skills/wiki/templates   ~/Documents/notes/templates/wiki
 ```
 
 ## Skills
@@ -25,6 +29,6 @@ Author, review, and sync project tickets in the Obsidian vault at
 - **review** — grade a ticket against the quality bar and suggest fixes.
 - **sync** — reconcile tickets with design docs; auto-fix safe drift, flag the rest.
 
-Router: `skills/ticket/SKILL.md`; modes: `skills/ticket/reference/{new,review,sync}.md`.
+Router: `skills/ticket/SKILL.md`; modes: `skills/ticket/references/{new,review,sync}.md`.
 See the vault's `tickets/Tickets Overview.md` for the ticket schema and the
 `Tickets.base` dashboard.

@@ -67,36 +67,11 @@ Fill every key from the schema in `SKILL.md`:
 Summarize what you created (ID, title, assignee, phase, feature). Then **offer to
 review it** (`review` mode). Don't auto-run review.
 
-## Skeleton to fill
-```markdown
----
-type: ticket
-id: C006
-project: Credo
-phase: 2
-status: todo
-priority: medium
-assignee: "[[Ed]]"
-feature: "[[projects/credo/features/Phase 2 - Core Views]]"
-depends_on: []
-agent: frontend
-created: 2026-06-07
-updated: 2026-06-07
----
-# C006 - <Title>
+## Skeleton
 
-## Background
-<why; link [[feature]] and [[concepts/...]]>
-
-## Implementation
-- <concrete step naming exact files/paths>
-- <…>
-- Do not <explicit out-of-scope boundary>.
-
-## Success Criteria
-- [ ] #task [[Credo]] [[Ed]] C006: <testable criterion>
-- [ ] #task [[Credo]] [[Ed]] C006: <testable criterion>
-
-## Concepts
-- [[concepts/...]]
-```
+The canonical skeleton is `templates/Ticket Template.md` (symlinked into the vault as
+`templates/ticket/Ticket Template.md`). Read it, replace each `<% tp.* %>` placeholder
+and HTML comment with the concrete values gathered above, and Write the file. Do not
+run `obsidian templater:create-from-template` — that pops interactive dialogs in the
+Obsidian UI (it's the manual-creation path; Templater also auto-applies this template
+when Ed creates an empty note under `tickets/` by hand).
