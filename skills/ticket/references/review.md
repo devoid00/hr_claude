@@ -8,7 +8,7 @@ first for the schema and the quality bar.
 ### 1. Identify and load
 - Identify the target ticket (by ID, filename, or "this ticket"). If unclear, ask.
 - Read the ticket file.
-- For grounding, read its linked `feature` file and `Decisions.md` (and any
+- For grounding, read the use case / requirement in its `serves:` field and `Decisions.md` (and any
   `concepts/*.md` it references or should).
 
 ### 2. Grade the rubric
@@ -20,12 +20,12 @@ ticket. Items derive from `Agent Workflow.md` + the schema.
 - `status` and `priority` are in the allowed vocab.
 - `assignee` is `[[T]]`/`[[Ed]]` or intentionally blank (flag unknown people).
 - `id` matches the filename prefix.
-- `feature` link resolves; `phase` matches that feature's phase.
+- `serves` links resolve; `phase` matches the served use case's phase.
 - `depends_on` links all resolve.
 
 **Background**
 - States *why* the ticket exists (not just what).
-- Links the relevant concept(s) and the feature.
+- Links the relevant concept(s) and what it serves.
 
 **Implementation**
 - Concrete and **file-path-specific** (names actual files/dirs).
@@ -36,7 +36,7 @@ ticket. Items derive from `Agent Workflow.md` + the schema.
 **Success Criteria**
 - Every criterion is **testable/objective** (flag vague or placeholder text, e.g. junk like `lsakjfd`, "works", "looks good").
 - Each has a `#task [[<Project>]] … <ID>:` line with the correct project tag and ID.
-- Criteria cover the feature's relevant acceptance criteria (note any gaps).
+- Criteria cover the served use case's relevant acceptance criteria (note any gaps).
 
 **Consistency**
 - Honors **decided** decisions in `Decisions.md` (flag any reliance on a rejected option).

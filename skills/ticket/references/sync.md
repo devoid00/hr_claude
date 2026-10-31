@@ -13,11 +13,11 @@ decision.** Read `SKILL.md` first.
 
 ### 1. Load state (read-only first)
 For the project (default Credo):
-- Every ticket in `tickets/<project>/` — parse frontmatter + the `#task` checkbox
+- Every ticket in `projects/<project>/tickets/` — parse frontmatter + the `#task` checkbox
   lines (`- [ ]`/`- [/]`/`- [x]` containing `#task`).
 - `Roadmap.md` phase table → `{phase: status}` (Done / Next / blank…).
-- `features/Features.md` table + each `features/Phase N - *.md` (frontmatter `status`,
-  the `## Status` body line, acceptance-criteria checkboxes, `## Linked Tickets`).
+- Each `product/use-cases/*.md` (frontmatter `phase`, `status`, `scope`; the
+  `## Acceptance criteria` checkboxes) and `product/Requirements.md`.
 - `Decisions.md` (which rows are **Decided** vs Undecided).
 - `STATUS.md`.
 - The team list from `SKILL.md`.
@@ -27,15 +27,15 @@ For each finding decide **AUTO-FIX (safe)** or **FLAG (needs human)**.
 
 | # | Check | Detect | Class |
 |---|-------|--------|-------|
-| 1 | **Phase-status drift** | ticket's `phase` is **Done** in Roadmap/Features but ticket `status` ≠ `done` | AUTO → set `status: done` |
-| 2 | **Coverage gap** | active/next phase has acceptance criteria but **0 tickets**, or feature criteria not covered by any ticket success-criterion | FLAG → suggest `new` mode (never auto-create) |
+| 1 | **Phase-status drift** | ticket's `phase` is **Done** in Roadmap but ticket `status` ≠ `done` | AUTO → set `status: done` |
+| 2 | **Coverage gap** | active/next phase has acceptance criteria but **0 tickets**, or a `launch`-scope use case that isn't `built` has no ticket serving it | FLAG → suggest `new` mode (never auto-create) |
 | 3 | **Criteria ↔ status** | **all** `#task` boxes checked but `status` ≠ done | AUTO → set `status: done` |
 | 3b| (reverse) | `status: done` but unchecked `#task` boxes remain | FLAG (can't assert work is done) |
 | 4 | **Decision impact** | a now-**Decided** decision conflicts with ticket content (mentions a rejected option) | FLAG → human review |
 | 5 | **Schema validity** | missing `type: ticket`; missing/invalid `status`/`priority`; unknown `assignee` | AUTO add `type`/normalize vocab casing; FLAG unknown assignee |
-| 5b| **Broken links** | `feature`/`concept`/`depends_on` link target missing | AUTO if exactly one unambiguous correct target exists; else FLAG |
-| 6 | **Feature-status drift** | feature frontmatter `status` ≠ `Features.md` ≠ `Roadmap.md`, or the duplicated `## Status` body line disagrees with frontmatter | AUTO when one source is unambiguously authoritative (Roadmap/Features agree); else FLAG |
-| 7 | **Back-link integrity** | feature `## Linked Tickets` ↔ tickets' `feature` field disagree | AUTO add the missing back-link |
+| 5b| **Broken links** | `serves`/`concept`/`depends_on` link target missing (a link into `_archive/features/` counts as broken) | AUTO if exactly one unambiguous correct target exists; else FLAG |
+| 6 | **Use-case status drift** | every ticket serving a use case is `done` but its `status` ≠ `built`, or all its acceptance criteria are ticked but `status` ≠ `built` | FLAG → suggest the status change (shipping is a human call) |
+| 7 | **Missing `serves`** | a Credo ticket with no `serves:` (or a leftover `feature:` field) | AUTO rename `feature:`→`serves:` when its target maps unambiguously to a use case; else FLAG |
 | 8 | **Staleness** | active-phase ticket with `updated` older than 21 days | FLAG (informational) |
 
 **Safety rules:** never delete a ticket; never invent acceptance criteria or check
@@ -48,7 +48,7 @@ Optionally refresh `STATUS.md`'s milestone checklist and "Last Updated" date to
 match the reconciled ticket states.
 
 ### 4. Write the report + summarize
-Write `tickets/<project>/_Sync Report.md`:
+Write `projects/<project>/tickets/_Sync Report.md`:
 ```markdown
 # <Project> — Sync Report (<date>)
 
