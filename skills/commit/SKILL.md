@@ -23,7 +23,7 @@ Two modes:
 | commit the current working-tree changes (staged/unstaged) as one or more grouped Conventional Commits | **commit** (default) | `references/commit.md` |
 | consolidate/clean up/prune the current branch's existing commits into a small set of feature-level Conventional Commits | **prune** | `references/prune.md` |
 
-Bare `/commit` (no argument) is **commit** mode. `/commit prune` is **prune** mode.
+Bare `/hr:commit` (no argument) is **commit** mode. `/hr:commit prune` is **prune** mode.
 
 ---
 

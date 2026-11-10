@@ -1,0 +1,14 @@
+{
+  "name": "hr",
+  "owner": {
+    "name": "Edward Herrick-Reynolds"
+  },
+  "plugins": [
+    {
+      "name": "hr",
+      "source": "./",
+      "description": "Personal Claude Code skills for an Obsidian vault: ticket, brainstorm, decide, travel, wiki, commit."
+    }
+  ],
+  "description": "Personal Obsidian-vault skills (ticket, brainstorm, decide, travel, wiki, commit)."
+}

@@ -26,7 +26,7 @@ file in `references/` and follow it exactly:
 | review / critique / check / grade an existing ticket; "is C00X any good?"        | **review** | `references/review.md` |
 | sync / validate / audit tickets; "a design doc changed"; "what's stale/missing" | **sync** | `references/sync.md`   |
 
-**Disambiguation.** If the request is bare (`/ticket` with no verb) or genuinely
+**Disambiguation.** If the request is bare (`/hr:ticket` with no verb) or genuinely
 ambiguous, use the **AskUserQuestion** tool to offer the three modes as options —
 **new** (draft a ticket), **review** (check one ticket), **sync** (validate all
 tickets vs design docs) — before doing anything. Don't guess between *review* (one

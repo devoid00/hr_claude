@@ -97,9 +97,9 @@ Fill `templates/trip-place.md` for each, per the semantics in
 
 Tell the user:
 - N place candidates created — review in Places.base (Places cards / Map views)
-- Delete unwanted places, add new ones with `/travel add place`
+- Delete unwanted places, add new ones with `/hr:travel add place`
 - Assign `day:` numbers in Places.base → Itinerary view (open standalone)
-- Run `/travel day-plan` once days are assigned to generate day pages
+- Run `/hr:travel day-plan` once days are assigned to generate day pages
 
 ---
 

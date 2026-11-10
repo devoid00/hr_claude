@@ -2,21 +2,29 @@
 
 Version-controlled Claude Code customizations (skills; later commands/hooks).
 
-`skills/` is symlinked into Claude Code's personal skills dir, so everything here
-is both **git-tracked** and **auto-discovered** every session:
+This repo is a Claude Code **plugin** (`hr`) and its own local **marketplace**
+(`.claude-plugin/plugin.json` + `.claude-plugin/marketplace.json`). Skills in
+`skills/` are auto-discovered and invoked namespaced: `/hr:ticket`, `/hr:brainstorm`, …
 
-```
-~/.claude/skills  →  ~/repos/hr_claude/skills
-```
+The plugin loads **in place** from this checkout: edits apply on `/reload-plugins`
+or the next session, no version bump or reinstall needed.
 
-Recreate the symlinks on a new machine:
+Install on a new machine:
 
 ```sh
-ln -s ~/repos/hr_claude/skills ~/.claude/skills
-# Obsidian note templates (Templater reads these from the vault):
+claude plugin marketplace add ~/repos/hr_claude
+claude plugin install hr@hr
+```
+
+For a one-off session against a different checkout: `claude --plugin-dir <path>`.
+
+Obsidian note templates are still symlinked into the vault (Templater reads them there):
+
+```sh
 ln -s ~/repos/hr_claude/skills/travel/templates ~/Documents/notes/templates/travel
 ln -s ~/repos/hr_claude/skills/ticket/templates ~/Documents/notes/templates/ticket
 ln -s ~/repos/hr_claude/skills/wiki/templates   ~/Documents/notes/templates/wiki
+ln -s ~/repos/hr_claude/skills/brainstorm/templates ~/Documents/notes/templates/brainstorm
 ```
 
 ## Skills
@@ -51,3 +59,16 @@ cleaning up history before a PR (rewrites local history; leaves a backup ref;
 never force-pushes on its own).
 
 Router: `skills/commit/SKILL.md`; modes: `skills/commit/references/{commit,prune}.md`.
+
+### `brainstorm`
+The step before tickets: exploring and researching ideas into vault notes.
+Four auto-routed modes:
+
+- **explore** — short interview, then a brainstorm note with angles, risks, and open questions.
+- **research** — answer a focused question with web/API/vault sources into a cited research note.
+- **capture** — append a quick idea to an inbox (`brainstorm/Inbox.md` or a project's `research/Inbox.md`).
+- **promote** — hand a mature note to `ticket`, `decide`, or `wiki`, with links both ways.
+
+Project notes go in `projects/<project>/research/<topic>/`; the rest in `brainstorm/`.
+`brainstorm/Brainstorm.base` (copied from `skills/brainstorm/resources/` on first use)
+lists them all. Router: `skills/brainstorm/SKILL.md`; modes: `skills/brainstorm/references/`.

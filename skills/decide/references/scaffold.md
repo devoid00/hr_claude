@@ -123,4 +123,4 @@ views:
 ## 6. Present and stop
 
 Summarize: workspace path, criteria + weights, status flow. Tell the user to add
-candidates with `/decide add <name or url>` — don't invent candidates yourself.
+candidates with `/hr:decide add <name or url>` — don't invent candidates yourself.
