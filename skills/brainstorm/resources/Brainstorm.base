@@ -1,0 +1,59 @@
+filters:
+  and:
+    - or:
+        - type == "brainstorm"
+        - type == "research"
+    - '!file.inFolder("templates")'
+formulas:
+  status_icon: if(status == "promoted", "🚀", if(status == "researched", "📚", if(status == "parked", "💤", if(status == "exploring", "🔍", "🌱"))))
+  stale: if(updated, if((today() - date(updated)).days > 30 && status != "promoted" && status != "parked", "🕒", ""), "")
+properties:
+  type:
+    displayName: Kind
+  project:
+    displayName: Project
+  status:
+    displayName: Status
+  updated:
+    displayName: Updated
+  formula.status_icon:
+    displayName: " "
+  formula.stale:
+    displayName: Stale
+views:
+  - type: table
+    name: By status
+    groupBy:
+      property: status
+      direction: ASC
+    order:
+      - formula.status_icon
+      - file.name
+      - type
+      - project
+      - updated
+      - formula.stale
+  - type: table
+    name: By project
+    groupBy:
+      property: project
+      direction: ASC
+    order:
+      - formula.status_icon
+      - file.name
+      - type
+      - status
+      - updated
+  - type: table
+    name: Active
+    filters:
+      and:
+        - status != "promoted"
+        - status != "parked"
+    order:
+      - formula.status_icon
+      - file.name
+      - project
+      - status
+      - updated
+      - formula.stale
